@@ -1,0 +1,28 @@
+﻿@model Agromercado.AppMVC.Models.Empleado
+
+<h2>Eliminar Empleado</h2>
+
+<div class="alert alert-danger">
+    ¿Estás seguro que deseas eliminar este empleado?
+</div>
+
+<div class="card mt-3">
+    <div class="card-body">
+        <p><strong>Nombre:</strong> @Model.Nombre</p>
+        <p><strong>Correo:</strong> @Model.Correo</p>
+        <p><strong>Rol:</strong> @Model.Rol?.Nombre</p>
+        <p><strong>Estado:</strong> @(Model.Activo ? "Activo" : "Inactivo")</p>
+    </div>
+</div>
+
+<form asp-action="DeleteConfirmed" method="post" class="mt-3">
+    <input type="hidden" asp-for="Id" />
+
+    <button type="submit" class="btn btn-danger">
+        Eliminar
+    </button>
+
+    <a asp-action="Index" class="btn btn-secondary">
+        Cancelar
+    </a>
+</form>

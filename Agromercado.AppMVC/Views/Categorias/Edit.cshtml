@@ -1,0 +1,28 @@
+﻿@model Agromercado.AppMVC.Models.Categoria
+
+<h2>Editar Categoría</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label>Nombre</label>
+        <input asp-for="Nombre" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Descripcion</label>
+        <input asp-for="Descripcion" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Estado</label>
+        <select asp-for="Estado" class="form-control">
+            <option value="true">Activo</option>
+            <option value="false">Inactivo</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Actualizar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>

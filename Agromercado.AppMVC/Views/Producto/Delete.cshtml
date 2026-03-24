@@ -1,0 +1,36 @@
+﻿@model Agromercado.AppMVC.Models.Producto
+
+<h2>Eliminar Producto</h2>
+
+<div class="alert alert-danger">
+    ¿Estás seguro que deseas eliminar este producto?
+</div>
+
+<div class="card mt-3">
+    <div class="card-body">
+
+        <p><strong>Nombre:</strong> @Model.Nombre</p>
+        <p><strong>Categoría:</strong> @Model.Categoria?.Nombre</p>
+        <p><strong>Unidad:</strong> @Model.UnidadMedida?.Nombre</p>
+        <p><strong>Precio de venta:</strong> @Model.PrecioVenta</p>
+        <p><strong>Precio Compra Promedio:</strong> @Model.PrecioCompraPromedio</p>
+        <p><strong>Stock:</strong> @Model.Stock</p>
+        <p><strong>Stock Mínimo:</strong> @Model.StockMinimo</p>
+        <p><strong>Fecha de Registro:</strong> @Model.FechaRegistro</p>
+
+    </div>
+</div>
+
+<form asp-action="DeleteConfirmed" method="post" class="mt-3">
+
+    <input type="hidden" asp-for="Id" />
+
+    <button type="submit" class="btn btn-danger">
+        Eliminar
+    </button>
+
+    <a asp-action="Index" class="btn btn-secondary">
+        Cancelar
+    </a>
+
+</form>

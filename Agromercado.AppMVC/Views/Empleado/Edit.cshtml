@@ -1,0 +1,44 @@
+﻿@model Agromercado.AppMVC.Models.Empleado
+
+<h2>Editar Empleado</h2>
+
+<form asp-action="Edit" method="post">
+
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label>Nombre</label>
+        <input asp-for="Nombre" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Correo</label>
+        <input asp-for="Correo" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Contraseña</label>
+        <input asp-for="Password" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Rol</label>
+        <select asp-for="RolId" class="form-control"
+                asp-items="@(new SelectList(ViewBag.Roles, "Id", "Nombre", Model.RolId))">
+            <option value="">-- Seleccione un rol --</option>
+        </select>
+        <span asp-validation-for="RolId" class="text-danger"></span>
+    </div>
+
+    <div class="mb-3">
+        <label>Activo</label>
+        <select asp-for="Activo" class="form-control">
+            <option value="true">Activo</option>
+            <option value="false">Inactivo</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-warning">Guardar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+
+</form>

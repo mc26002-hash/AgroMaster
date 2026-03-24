@@ -1,0 +1,16 @@
+﻿@model Agromercado.AppMVC.Models.Role
+
+<h2>Detalle del Rol</h2>
+
+<p><strong>Nombre:</strong> @Model.Nombre</p>
+
+<h4>Empleados con este rol:</h4>
+
+<ul>
+    @foreach (var emp in Model.Empleados)
+    {
+        <li>@emp.Nombre</li>
+    }
+</ul>
+
+<a asp-action="Index" class="btn btn-secondary">Volver</a>

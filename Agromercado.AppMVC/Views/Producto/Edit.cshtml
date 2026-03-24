@@ -1,0 +1,66 @@
+﻿@model Agromercado.AppMVC.Models.Producto
+
+<h2>Editar Producto</h2>
+
+<form asp-action="Edit" method="post">
+
+    <input type="hidden" asp-for="Id" />
+
+    <div class="mb-3">
+        <label>Nombre</label>
+        <input asp-for="Nombre" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Categoría</label>
+        <select asp-for="CategoriaId" class="form-control"
+                asp-items="@(new SelectList(ViewBag.Categorias, "Id", "Nombre", Model.CategoriaId))">
+            <option value="">-- Seleccione categoría --</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label>Unidad de Medida</label>
+        <select asp-for="UnidadMedidaId" class="form-control"
+                asp-items="@(new SelectList(ViewBag.Unidades, "Id", "Nombre", Model.UnidadMedidaId))">
+            <option value="">-- Seleccione unidad --</option>
+        </select>
+    </div>
+
+    <div class="mb-3">
+        <label>Precio de Venta</label>
+        <input asp-for="PrecioVenta" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Precio Compra Promedio</label>
+        <input asp-for="PrecioCompraPromedio" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Stock</label>
+        <input asp-for="Stock" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Stock Mínimo</label>
+        <input asp-for="StockMinimo" class="form-control" />
+    </div>
+
+    <div class="mb-3">
+        <label>Activo</label>
+        <select asp-for="Activo" class="form-control">
+            <option value="true">Activo</option>
+            <option value="false">Inactivo</option>
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-warning">
+        Guardar
+    </button>
+
+    <a asp-action="Index" class="btn btn-secondary">
+        Cancelar
+    </a>
+
+</form>

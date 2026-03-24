@@ -1,0 +1,25 @@
+﻿@model Agromercado.AppMVC.Models.Role
+
+<h2>Eliminar Rol</h2>
+
+<div class="alert alert-danger">
+    ¿Estás seguro que deseas eliminar este rol?
+</div>
+
+<div class="card mt-3">
+    <div class="card-body">
+        <p><strong>Nombre:</strong> @Model.Nombre</p>
+    </div>
+</div>
+
+<form asp-action="DeleteConfirmed" method="post" class="mt-3">
+    <input type="hidden" asp-for="Id" />
+
+    <button type="submit" class="btn btn-danger">
+        Eliminar
+    </button>
+
+    <a asp-action="Index" class="btn btn-secondary">
+        Cancelar
+    </a>
+</form>

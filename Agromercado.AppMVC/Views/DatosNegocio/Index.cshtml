@@ -1,0 +1,22 @@
+﻿@model Agromercado.AppMVC.Models.DatosNegocio
+
+@{
+    ViewData["Title"] = "Datos del Negocio";
+}
+
+<h2>Datos del Negocio</h2>
+
+<div class="card mt-3">
+    <div class="card-body">
+
+        <p><strong>Nombre:</strong> @Model.Nombre</p>
+        <p><strong>Dirección:</strong> @Model.Direccion</p>
+        <p><strong>Teléfono:</strong> @Model.Telefono</p>
+        <p><strong>Correo:</strong> @Model.Correo</p>
+
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">
+            Editar
+        </a>
+
+    </div>
+</div>

@@ -1,0 +1,15 @@
+﻿@model Agromercado.AppMVC.Models.UnidadMedidum
+
+<h2>Eliminar Unidad</h2>
+
+<div class="alert alert-danger">
+    ¿Seguro que deseas eliminar esta unidad?
+</div>
+
+<p><strong>@Model.Nombre</strong></p>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Eliminar</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancelar</a>
+</form>

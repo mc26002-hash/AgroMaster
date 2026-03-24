@@ -1,0 +1,14 @@
+﻿@model Agromercado.AppMVC.Models.UnidadMedidum
+
+<h2>Detalle Unidad</h2>
+
+<div class="card">
+    <div class="card-body">
+        <p><strong>Nombre:</strong> @Model.Nombre</p>
+        <p><strong>Abreviatura:</strong> @Model.Abreviatura</p>
+        <p><strong>Tipo:</strong> @Model.Tipo</p>
+
+        <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Editar</a>
+        <a asp-action="Index" class="btn btn-secondary">Volver</a>
+    </div>
+</div>
