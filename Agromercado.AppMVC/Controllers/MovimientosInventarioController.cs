@@ -14,15 +14,36 @@ namespace Agromercado.AppMVC.Controllers
             _context = context;
         }
 
-        // ============================
-        // LISTA DE MOVIMIENTOS
-        // ============================
-        public IActionResult Index()
+        public IActionResult Index(MovimientosInventario? movimientoSearch, int topRegistro = 10)
         {
-            var movimientos = _context.MovimientosInventarios
+            var query = _context.MovimientosInventarios
                 .Include(m => m.Producto)
+                .AsQueryable();
+
+            if (movimientoSearch == null)
+                movimientoSearch = new MovimientosInventario();
+
+            // 🔍 Producto
+            if (movimientoSearch.ProductoId > 0)
+                query = query.Where(m => m.ProductoId == movimientoSearch.ProductoId);
+
+            // 🔍 Tipo de movimiento
+            if (!string.IsNullOrWhiteSpace(movimientoSearch.TipoMovimiento))
+                query = query.Where(m => m.TipoMovimiento.Contains(movimientoSearch.TipoMovimiento));
+
+            // 🔍 Cantidad
+            if (movimientoSearch.Cantidad > 0)
+                query = query.Where(m => m.Cantidad == movimientoSearch.Cantidad);
+
+            // 🔢 Orden + cantidad
+            query = query
                 .OrderByDescending(m => m.Fecha)
-                .ToList();
+                .Take(topRegistro);
+
+            var movimientos = query.ToList();
+
+            // 🔽 Para el select de productos
+            ViewBag.Productos = _context.Productos.ToList();
 
             return View(movimientos);
         }

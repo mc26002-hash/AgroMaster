@@ -20,7 +20,108 @@
     </a>
 </p>
 
-<table class="table table-striped">
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title mb-3">Buscar Movimientos</h5>
+
+            <form asp-controller="MovimientosInventario" asp-action="Index" method="get">
+                <div class="row g-3 align-items-end">
+
+                    <!-- 🔽 Producto -->
+                    <div class="col-md-4">
+                        <label class="form-label fw-bold text-muted small">Producto</label>
+                        <div class="input-group shadow-sm">
+                            <span class="input-group-text bg-white">
+                                <i class="bi bi-box text-primary"></i>
+                            </span>
+                            <select name="productoId" class="form-select">
+                                <option value="0">Todos</option>
+                                @foreach (var prod in ViewBag.Productos)
+                                {
+                                    <option value="@prod.Id"
+                                            selected="@(Context.Request.Query["productoId"] == prod.Id.ToString())">
+                                        @prod.Nombre
+                                    </option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- 🔽 Tipo Movimiento -->
+                    <div class="col-md-3">
+                        <label class="form-label fw-bold text-muted small">Tipo</label>
+                        <div class="input-group shadow-sm">
+                            <span class="input-group-text bg-white">
+                                <i class="bi bi-arrow-left-right text-primary"></i>
+                            </span>
+                            <select name="tipoMovimiento" class="form-select">
+                                <option value="">Todos</option>
+                                <option value="Entrada"
+                                        selected="@(Context.Request.Query["tipoMovimiento"] == "Entrada")">
+                                    Entrada
+                                </option>
+                                <option value="Salida"
+                                        selected="@(Context.Request.Query["tipoMovimiento"] == "Salida")">
+                                    Salida
+                                </option>
+                                <option value="Entrada Inicial"
+                                        selected="@(Context.Request.Query["tipoMovimiento"] == "Entrada Inicial")">
+                                    Entrada Inicial
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- 🔢 Cantidad -->
+                    <div class="col-md-3">
+                        <label class="form-label fw-bold text-muted small">Cantidad</label>
+                        <div class="input-group shadow-sm">
+                            <span class="input-group-text bg-white">
+                                <i class="bi bi-list-ol text-primary"></i>
+                            </span>
+                            <input type="number" name="cantidad" class="form-control"
+                                   placeholder="Ej: 10"
+                                   value="@Context.Request.Query["cantidad"]" />
+                        </div>
+                    </div>
+
+                    <!-- 🔢 Cantidad de registros -->
+                    <div class="col-md-2">
+                        <label class="form-label fw-bold text-muted small">Mostrar</label>
+                        <div class="input-group shadow-sm">
+                            <span class="input-group-text bg-white">
+                                <i class="bi bi-eye text-primary"></i>
+                            </span>
+                            <input type="number" name="topRegistro" class="form-control"
+                                   placeholder="10"
+                                   value="@Context.Request.Query["topRegistro"]" />
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Botones -->
+                <div class="row mt-4">
+                    <div class="col-12 d-flex gap-2">
+
+                        <button type="submit" class="btn btn-primary px-4 shadow-sm fw-bold">
+                            <i class="bi bi-search me-2"></i>Buscar
+                        </button>
+
+                        <a asp-action="Index" class="btn btn-secondary px-4 shadow-sm">
+                            Limpiar
+                        </a>
+
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<table class="table table-striped mt-4">
     <thead>
         <tr>
             <th>Producto</th>
@@ -64,10 +165,3 @@
         }
     </tbody>
 </table>
-
-<!-- 🔥 ACTUALIZACIÓN AUTOMÁTICA (TIEMPO REAL) -->
-<script>
-    setInterval(() => {
-        location.reload();
-    }, 5000);
-</script>
