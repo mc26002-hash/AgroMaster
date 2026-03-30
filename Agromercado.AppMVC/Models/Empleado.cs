@@ -12,6 +12,7 @@ public partial class Empleado
     [StringLength(60, ErrorMessage = "El nombre no puede superar los 60 caracteres")]
     public string Nombre { get; set; } = null!;
 
+    [Required(ErrorMessage = "El correo es obligatorio")]
     [EmailAddress(ErrorMessage = "El correo electrónico no es válido")]
     [StringLength(100)]
     public string? Correo { get; set; }
@@ -21,7 +22,7 @@ public partial class Empleado
     public string? Password { get; set; }
 
     [Required(ErrorMessage = "Debe asignar un rol al empleado")]
-    public int RolId { get; set; }
+    public int? RolId { get; set; }
 
     public bool Activo { get; set; }
 

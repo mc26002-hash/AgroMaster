@@ -32,7 +32,12 @@ public class AccountController : Controller
         if (usuario != null)
         {
             HttpContext.Session.SetString("Usuario", usuario.Nombre);
-            HttpContext.Session.SetInt32("RolId", usuario.RolId);
+
+            // 🔥 Validar nullable
+            if (usuario.RolId.HasValue)
+            {
+                HttpContext.Session.SetInt32("RolId", usuario.RolId.Value);
+            }
 
             return RedirectToAction("Index", "Home");
         }
