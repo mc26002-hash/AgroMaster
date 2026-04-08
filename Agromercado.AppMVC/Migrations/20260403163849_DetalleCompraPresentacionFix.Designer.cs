@@ -4,6 +4,7 @@ using Agromercado.AppMVC.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Agromercado.AppMVC.Migrations
 {
     [DbContext(typeof(AgroMercadoSprintDbContext))]
-    partial class AgroMercadoSprintDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260403163849_DetalleCompraPresentacionFix")]
+    partial class DetalleCompraPresentacionFix
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -328,8 +331,8 @@ namespace Agromercado.AppMVC.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<decimal>("Cantidad")
-                        .HasColumnType("decimal(18,2)");
+                    b.Property<int>("Cantidad")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("Fecha")
                         .ValueGeneratedOnAdd()
@@ -342,9 +345,6 @@ namespace Agromercado.AppMVC.Migrations
                         .HasColumnType("nvarchar(200)");
 
                     b.Property<int>("ProductoId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ProductoPresentacionId")
                         .HasColumnType("int");
 
                     b.Property<int?>("ReferenciaId")
@@ -360,8 +360,6 @@ namespace Agromercado.AppMVC.Migrations
                         .HasName("PK__Movimien__3214EC076DEADF61");
 
                     b.HasIndex("ProductoId");
-
-                    b.HasIndex("ProductoPresentacionId");
 
                     b.ToTable("MovimientosInventario", (string)null);
                 });
@@ -399,10 +397,10 @@ namespace Agromercado.AppMVC.Migrations
                     b.Property<decimal>("PrecioVenta")
                         .HasColumnType("decimal(10, 2)");
 
-                    b.Property<decimal>("Stock")
+                    b.Property<int?>("Stock")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("decimal(18,2)")
-                        .HasDefaultValue(0m, "DF_Productos_Stock");
+                        .HasColumnType("int")
+                        .HasDefaultValue(0, "DF_Productos_Stock");
 
                     b.Property<int>("StockMinimo")
                         .ValueGeneratedOnAdd()
@@ -520,10 +518,6 @@ namespace Agromercado.AppMVC.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Descripcion")
-                        .HasMaxLength(200)
-                        .HasColumnType("nvarchar(200)");
 
                     b.Property<string>("Nombre")
                         .IsRequired()
@@ -722,13 +716,7 @@ namespace Agromercado.AppMVC.Migrations
                         .IsRequired()
                         .HasConstraintName("FK_Movimientos_Productos");
 
-                    b.HasOne("Agromercado.AppMVC.Models.ProductoPresentacion", "ProductoPresentacion")
-                        .WithMany()
-                        .HasForeignKey("ProductoPresentacionId");
-
                     b.Navigation("Producto");
-
-                    b.Navigation("ProductoPresentacion");
                 });
 
             modelBuilder.Entity("Agromercado.AppMVC.Models.Producto", b =>

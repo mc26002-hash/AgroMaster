@@ -15,33 +15,21 @@ public partial class AgroMercadoSprintDbContext : DbContext
     {
     }
 
-    public virtual DbSet<AjusteInventario> AjusteInventarios { get; set; }
-
-    public virtual DbSet<Categoria> Categorias { get; set; }
-
-    public virtual DbSet<Cliente> Clientes { get; set; }
-
-    public virtual DbSet<Compra> Compras { get; set; }
-
-    public virtual DbSet<DatosNegocio> DatosNegocios { get; set; }
-
-    public virtual DbSet<DetalleCompra> DetalleCompras { get; set; }
-
-    public virtual DbSet<DetalleVentum> DetalleVenta { get; set; }
-
-    public virtual DbSet<Empleado> Empleados { get; set; }
-
-    public virtual DbSet<MovimientosInventario> MovimientosInventarios { get; set; }
-
-    public virtual DbSet<Producto> Productos { get; set; }
-
-    public virtual DbSet<Proveedore> Proveedores { get; set; }
-
-    public virtual DbSet<Role> Roles { get; set; }
-
-    public virtual DbSet<UnidadMedidum> UnidadMedida { get; set; }
-
-    public virtual DbSet<Venta> Ventas { get; set; }
+    public virtual DbSet<AjusteInventario> AjusteInventarios { get; set; } = null!;
+    public virtual DbSet<Categoria> Categorias { get; set; } = null!;
+    public virtual DbSet<Cliente> Clientes { get; set; } = null!;
+    public virtual DbSet<Compra> Compras { get; set; } = null!;
+    public virtual DbSet<DatosNegocio> DatosNegocios { get; set; } = null!;
+    public virtual DbSet<DetalleCompra> DetalleCompras { get; set; } = null!;
+    public virtual DbSet<DetalleVentum> DetalleVenta { get; set; } = null!;
+    public virtual DbSet<Empleado> Empleados { get; set; } = null!;
+    public virtual DbSet<MovimientosInventario> MovimientosInventarios { get; set; } = null!;
+    public virtual DbSet<Producto> Productos { get; set; } = null!;
+    public virtual DbSet<Proveedore> Proveedores { get; set; } = null!;
+    public virtual DbSet<Role> Roles { get; set; } = null!;
+    public virtual DbSet<UnidadMedidum> UnidadMedida { get; set; } = null!;
+    public virtual DbSet<Venta> Ventas { get; set; } = null!;
+    public virtual DbSet<ProductoPresentacion> ProductoPresentaciones { get; set; } = null!;
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
