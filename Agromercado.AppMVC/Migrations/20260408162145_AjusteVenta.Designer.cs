@@ -4,6 +4,7 @@ using Agromercado.AppMVC.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Agromercado.AppMVC.Migrations
 {
     [DbContext(typeof(AgroMercadoSprintDbContext))]
-    partial class AgroMercadoSprintDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260408162145_AjusteVenta")]
+    partial class AjusteVenta
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -92,7 +95,7 @@ namespace Agromercado.AppMVC.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<bool>("Activo")
+                    b.Property<bool?>("Activo")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(true, "DF_Clientes_Activo");
@@ -108,11 +111,23 @@ namespace Agromercado.AppMVC.Migrations
                         .HasColumnType("varchar(10)")
                         .HasColumnName("DUI");
 
+                    b.Property<string>("Nit")
+                        .HasMaxLength(20)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(20)")
+                        .HasColumnName("NIT");
+
                     b.Property<string>("Nombre")
                         .IsRequired()
                         .HasMaxLength(60)
                         .IsUnicode(false)
                         .HasColumnType("varchar(60)");
+
+                    b.Property<string>("Nrc")
+                        .HasMaxLength(20)
+                        .IsUnicode(false)
+                        .HasColumnType("varchar(20)")
+                        .HasColumnName("NRC");
 
                     b.Property<string>("Telefono")
                         .HasMaxLength(20)
@@ -250,9 +265,6 @@ namespace Agromercado.AppMVC.Migrations
                     b.Property<int>("ProductoId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ProductoPresentacionId")
-                        .HasColumnType("int");
-
                     b.Property<decimal>("SubTotal")
                         .HasColumnType("decimal(10, 2)");
 
@@ -263,8 +275,6 @@ namespace Agromercado.AppMVC.Migrations
                         .HasName("PK__DetalleV__3214EC074BD11674");
 
                     b.HasIndex("ProductoId");
-
-                    b.HasIndex("ProductoPresentacionId");
 
                     b.HasIndex("VentaId");
 
@@ -685,12 +695,6 @@ namespace Agromercado.AppMVC.Migrations
                         .IsRequired()
                         .HasConstraintName("FK__DetalleVe__Produ__6FE99F9F");
 
-                    b.HasOne("Agromercado.AppMVC.Models.ProductoPresentacion", "ProductoPresentacion")
-                        .WithMany()
-                        .HasForeignKey("ProductoPresentacionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("Agromercado.AppMVC.Models.Venta", "Venta")
                         .WithMany("DetalleVenta")
                         .HasForeignKey("VentaId")
@@ -698,8 +702,6 @@ namespace Agromercado.AppMVC.Migrations
                         .HasConstraintName("FK__DetalleVe__Venta__6EF57B66");
 
                     b.Navigation("Producto");
-
-                    b.Navigation("ProductoPresentacion");
 
                     b.Navigation("Venta");
                 });

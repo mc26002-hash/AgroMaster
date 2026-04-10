@@ -1,23 +1,35 @@
-﻿@model Agromercado.AppMVC.Models.Compra
+﻿@model Agromercado.AppMVC.Models.Venta
 
 <div class="agrocmp-container">
 
-    <h2 class="agrocmp-title text-center mb-4">🛒 Nueva Compra</h2>
+    <h2 class="agrocmp-title text-center mb-4">💰 Nueva Venta</h2>
 
     <form asp-action="Create" method="post">
         @Html.AntiForgeryToken()
 
-        <!-- 🔹 PROVEEDOR -->
+        <!-- 🔹 CLIENTE + MÉTODO -->
         <div class="row">
             <div class="col-md-6">
                 <div class="agrocmp-card mb-3">
-                    <label class="form-label agrocmp-label">Proveedor</label>
-                    <select asp-for="ProveedorId" class="form-select">
+                    <label class="form-label agrocmp-label">Cliente</label>
+                    <select asp-for="ClienteId" class="form-select">
                         <option value="">-- Seleccione --</option>
-                        @foreach (var item in ViewBag.Proveedores)
+                        @foreach (var item in ViewBag.Clientes)
                         {
                             <option value="@item.Id">@item.Nombre</option>
                         }
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="agrocmp-card mb-3">
+                    <label class="agrocmp-label">Método de Pago</label>
+                    <select asp-for="MetodoPago" class="form-select">
+                        <option value="">-- Seleccione --</option>
+                        <option value="Efectivo">Efectivo</option>
+                        <option value="Tarjeta">Tarjeta</option>
+                        <option value="Transferencia">Transferencia</option>
                     </select>
                 </div>
             </div>
@@ -58,8 +70,22 @@
 
         <hr />
 
-        <!-- 🔹 TOTAL -->
+        <!-- 🔹 TOTALES -->
         <div class="row">
+            <div class="col-md-4">
+                <div class="agrocmp-card">
+                    <label class="agrocmp-label">SubTotal</label>
+                    <input asp-for="SubTotal" class="form-control text-end fw-bold" readonly />
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="agrocmp-card">
+                    <label class="agrocmp-label">IVA (13%)</label>
+                    <input asp-for="Iva" class="form-control text-end fw-bold" readonly />
+                </div>
+            </div>
+
             <div class="col-md-4">
                 <div class="agrocmp-card">
                     <label class="agrocmp-label">Total</label>
@@ -141,9 +167,8 @@
 
         function calcular(input) {
             let fila = input.closest("tr");
-
-            let cantidad = parseFloat(fila.querySelector("input[name*='Cantidad']").value) || 0;
-            let precio = parseFloat(fila.querySelector("input[name*='Precio']").value) || 0;
+            let cantidad = fila.querySelector("input[name*='Cantidad']").value || 0;
+            let precio = fila.querySelector("input[name*='Precio']").value || 0;
 
             let subtotal = cantidad * precio;
 
@@ -153,12 +178,17 @@
         }
 
         function calcularTotal() {
-            let total = 0;
+            let subtotal = 0;
 
             document.querySelectorAll(".subtotal").forEach(s => {
-                total += parseFloat(s.value) || 0;
+                subtotal += parseFloat(s.value) || 0;
             });
 
+            let iva = subtotal * 0.13;
+            let total = subtotal + iva;
+
+            document.querySelector("input[name='SubTotal']").value = subtotal.toFixed(2);
+            document.querySelector("input[name='Iva']").value = iva.toFixed(2);
             document.querySelector("input[name='Total']").value = total.toFixed(2);
         }
 
